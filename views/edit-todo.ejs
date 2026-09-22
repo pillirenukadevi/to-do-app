@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Edit Task - TaskMaster</title>
+    <link rel="stylesheet" href="/css/style.css">
+</head>
+<body>
+
+    <nav>
+        <a href="/" class="nav-brand">
+            <div class="brand-icon">
+                <svg width="20" height="20" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M5 13l4 4L19 7" />
+                </svg>
+            </div>
+            <span class="brand-text">TaskMaster</span>
+        </a>
+
+        <div class="nav-links">
+            <a href="/todos" class="nav-link">Back to Todos</a>
+            <form action="/logout" method="POST" style="display:inline; margin:0;">
+                <button type="submit" class="btn btn-secondary btn-sm">Logout</button>
+            </form>
+        </div>
+    </nav>
+
+    <div class="container auth-container" style="max-width: 580px;">
+        <div class="card">
+            <h1>Edit Todo</h1>
+            <p class="subtitle">Modify your task details and completion status.</p>
+
+            <% if (typeof errors !== 'undefined' && errors && errors.length > 0) { %>
+                <% errors.forEach(error => { %>
+                    <div class="alert error">
+                        <svg width="18" height="18" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z" />
+                        </svg>
+                        <span><%= error %></span>
+                    </div>
+                <% }) %>
+            <% } %>
+
+            <% if (typeof messages !== 'undefined' && messages && messages.length > 0) { %>
+                <% messages.forEach(message => { %>
+                    <div class="alert success">
+                        <svg width="18" height="18" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
+                        </svg>
+                        <span><%= message %></span>
+                    </div>
+                <% }) %>
+            <% } %>
+
+            <form action="/edit-todo/<%= todo.id %>" method="POST">
+                <div class="form-group">
+                    <label for="title">Task Title</label>
+                    <input
+                        id="title"
+                        type="text"
+                        name="title"
+                        value="<%= todo.title %>"
+                        required
+                    >
+                </div>
+
+                <div class="form-group">
+                    <label for="dueDate">Due Date</label>
+                    <input
+                        id="dueDate"
+                        type="date"
+                        name="dueDate"
+                        value="<%= todo.dueDate %>"
+                        required
+                    >
+                </div>
+
+                <div class="form-group">
+                    <label for="description">Description</label>
+                    <textarea
+                        id="description"
+                        name="description"
+                        rows="4"
+                    ><%= todo.description || "" %></textarea>
+                </div>
+
+                <div class="form-group">
+                    <label class="checkbox-label">
+                        <input
+                            type="checkbox"
+                            name="completed"
+                            value="true"
+                            <% if (todo.completed) { %> checked <% } %>
+                        >
+                        <span>Mark as Completed</span>
+                    </label>
+                </div>
+
+                <div style="display: flex; gap: 0.75rem; margin-top: 0.5rem;">
+                    <button type="submit" class="btn btn-primary" style="flex: 1;">
+                        Save Changes
+                    </button>
+                    <a href="/todos" class="btn btn-secondary">
+                        Cancel
+                    </a>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <footer>
+        <p>&copy; 2026 TaskMaster Todo Manager</p>
+    </footer>
+
+</body>
+</html>

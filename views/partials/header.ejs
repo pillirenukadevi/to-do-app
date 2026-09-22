@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Todo App</title>
+
+    <link rel="stylesheet" href="/css/style.css">
+</head>
+
+<body>
+
+<nav class="navbar">
+
+    <div class="container">
+
+        <a href="/" class="logo">
+            Todo App
+        </a>
+
+        <div class="nav-links">
+
+            <% if (typeof user !== 'undefined' && user) { %>
+
+                <a href="/">Home</a>
+                <a href="/todos">My Todos</a>
+                <a href="/todos/new">Add Todo</a>
+
+                <form action="/logout" method="POST" style="display:inline;">
+                    <button type="submit" class="logout-btn">
+                        Logout
+                    </button>
+                </form>
+
+            <% } else { %>
+
+                <a href="/login">Login</a>
+                <a href="/signup">Signup</a>
+
+            <% } %>
+
+        </div>
+
+    </div>
+
+</nav>
+
+<main class="container">

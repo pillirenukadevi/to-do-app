@@ -1,0 +1,25 @@
+<% if (typeof messages !== 'undefined' && messages) { %>
+    <% if (messages.success && messages.success.length > 0) { %>
+        <% messages.success.forEach(function(message) { %>
+            <div class="alert success">
+                <%= message %>
+            </div>
+        <% }); %>
+    <% } %>
+
+    <% if (messages.error && messages.error.length > 0) { %>
+        <% messages.error.forEach(function(message) { %>
+            <div class="alert error">
+                <%= message %>
+            </div>
+        <% }); %>
+    <% } %>
+<% } %>
+
+<% if (typeof errors !== 'undefined' && errors && errors.length > 0) { %>
+    <% errors.forEach(function(error) { %>
+        <div class="alert error">
+            <%= error %>
+        </div>
+    <% }); %>
+<% } %>
